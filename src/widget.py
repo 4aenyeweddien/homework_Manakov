@@ -1,16 +1,14 @@
 from src import masks
 
 
-def mask_account_card(number_card_account: str) -> str:
+def mask_account_card(number_card_account: str) -> str | None:
     """Принимает строку и возвращает замаскированную"""
     if len(number_card_account.split()[-1]) == 16:
         new_account = masks.get_mask_card_number(number_card_account.split()[-1])
-        disguised_account = f"{number_card_account[:-16]}{new_account}"
-        return disguised_account
-    elif len(number_card_account.split()[-1]) == 20:
+        return f"{number_card_account[:-16]}{new_account}"
+    else:
         new_card = masks.get_mask_account(number_card_account.split()[-1])
-        disguised_card = f"{number_card_account[:-20]}{new_card}"
-        return disguised_card
+        return f"{number_card_account[:-20]}{new_card}"
 
 
 def get_data(date: str) -> str:
