@@ -13,17 +13,23 @@ def mask_account_card(user_input: str) -> str:
         return disguised_card
 
 
+def get_data(date: str) -> str:
+    """Принимает строку и выводит дату в нужном формате"""
+    date_to_edit = date[0:10].split("-")
+    new_date = ".".join(date_to_edit[::-1])
+    return new_date
 
 
-#
-# user = input()
-# result = mask_account_card(user)
-# print(result)
-#
-#
-#
-#
-#
-# # def get_data():
-# #     """Принимает строку и выводит дату"""
+user_card = input()
+user_date = input()
+result_card = mask_account_card(user_card)
+result_date = get_data(user_date)
+print(result_card)
+print(result_date)
+
+
+
+
+
+
 
