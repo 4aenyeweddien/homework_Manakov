@@ -21,6 +21,9 @@ exclude = '''
   /(
       \.git
     | \.mypy_cache
+    | \.venv
+    | venv
+    | env
   )/
 )
 '''

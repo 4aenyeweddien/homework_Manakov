@@ -8,5 +8,3 @@ def get_mask_account(account: str) -> str:
     """Принимает номер счета и возвращает замескированный номер счета"""
 
     return f"**{account[-4:]}"
-
-
