@@ -5,11 +5,10 @@
 Домашняя работа по блоку 10.1. Работа с GITHUB
 
 ## Установка:
-
-
+```
+git clone git@github.com:4aenyeweddien/homework_Manakov.git
+```
 ## Использование:
-
-
 
 ## Документация:
 
