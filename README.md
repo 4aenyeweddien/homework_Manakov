@@ -5,8 +5,14 @@
 Домашняя работа по блоку 10.1. Работа с GITHUB
 
 ## Установка:
+
+1. Клонируйте репозиторий:
 ```
-git clone git@github.com:4aenyeweddien/homework_Manakov.git
+git clone https://github.com/username/myblog.git
+```
+2. Установите зависимости:
+```
+pip install -r requirements.txt
 ```
 ## Использование:
 
