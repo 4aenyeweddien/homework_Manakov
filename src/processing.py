@@ -7,14 +7,14 @@ def filter_by_state(list_dict: list[dict[str, Any]], state_id: str = "EXECUTED")
     new_list = []
 
     for key in list_dict:
-        if key['state'] == state_id:
+        if key["state"] == state_id:
             new_list.append(key)
     return new_list
 
 
 def sort_by_date(list_dict: list[dict[str, Any]], reverse: bool = True) -> list[dict[str, Any]]:
     """Сортирует список словарей по убывванию даты"""
-    sorted_list_dict_date = sorted(list_dict, key=lambda list_dict: list_dict['date'], reverse=reverse)
+    sorted_list_dict_date = sorted(list_dict, key=lambda list_dict: list_dict["date"], reverse=reverse)
     return sorted_list_dict_date
 
 
