@@ -121,9 +121,8 @@ def test_transaction_descriptions(transaction):
 
 def test_transaction_descriptions_empty(transaction):
     """тест на вывод описания карт при пустом списке"""
-    with pytest.raises(StopIteration):
-        generator = transaction_descriptions([])
-        assert next(generator)
+    generator = transaction_descriptions([])
+    assert next(generator, "Операции не найдены") == "Операции не найдены"
 
 
 def test_card_number_generator():
