@@ -99,16 +99,14 @@ def test_filter_by_currency_rub(transaction):
 
 def test_filter_by_no_currency(transaction):
     """тест на фильтрацию по некорректной валюте"""
-    with pytest.raises(StopIteration):
-        generator = filter_by_currency(transaction, filter_transaction="YEN")
-        assert next(generator)
+    generator = filter_by_currency(transaction, filter_transaction="YEN")
+    assert next(generator, "Операции не найдены") == "Операции не найдены"
 
 
 def test_filter_by_no_currency_empty(transaction):
     """тест на фильтрацию операций в пустом списке"""
-    with pytest.raises(StopIteration):
-        generator = filter_by_currency([], filter_transaction="YEN")
-        assert next(generator)
+    generator = filter_by_currency([], filter_transaction="RUB")
+    assert next(generator, "Операции не найдены") == "Операции не найдены"
 
 
 def test_transaction_descriptions(transaction):

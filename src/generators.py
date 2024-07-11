@@ -1,18 +1,23 @@
 from typing import Generator
 
 
-def filter_by_currency(transaction: list[dict], filter_transaction: str) -> Generator:
+def filter_by_currency(transactions: list[dict], filter_transaction: str) -> Generator:
     """создает итератор по списку словарей и выводит поочередно операции с указанной валютой"""
-    for operation in transaction:
+    if not transactions:
+        return iter([])
+    incorrect_currency = all(
+        operation["operationAmount"]["currency"]["code"] != filter_transaction for operation in transactions
+    )
+    if incorrect_currency:
+        return iter([])
+    for operation in transactions:
         if operation["operationAmount"]["currency"]["code"] == filter_transaction:
             yield operation
-    # filter_transact = filter(lambda x: x["operationAmount"]["currency"]["code"] == filter_transaction, transaction)
-    # return filter_transact
 
 
-def transaction_descriptions(transaction: list[dict]) -> Generator:
+def transaction_descriptions(transactions: list[dict]) -> Generator:
     """выводит описание операций"""
-    for operation in transaction:
+    for operation in transactions:
         yield operation["description"]
 
 
@@ -26,10 +31,10 @@ def card_number_generator(a: int, b: int) -> Generator:
         yield create_card
 
 
-# if __name__ == '__main__':
+# if __name__ == "__main__":
 #     usd_transactions = filter_by_currency(transactions, "USD")
-#     for _ in range(2):
-#         print(next(usd_transactions))
+#     for _ in range(3):
+#         print(next(usd_transactions, "Операции не найдены"))
 #
 #     # descriptions = transaction_descriptions(transactions)
 #     # for _ in range(5):
