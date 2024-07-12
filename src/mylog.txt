@@ -1,2 +1,9 @@
+my_function error: can only concatenate str (not "int") to str. Inputs:('1', 2), {}
+my_function error: can only concatenate str (not "int") to str. Inputs:('1', 2), {}
 my_function ok
-my_function error: unsupported operand type(s) for +: 'int' and 'str'. Inputs:('1', '2'), {}
+Результат3nmy_function ok
+Результат3
+my_function ok
+Результат0.5
+my_function ok
+Результат60

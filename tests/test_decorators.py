@@ -1,10 +1,11 @@
 import pytest
 from src.decorators import log, my_function
+import tempfile
 
 
 def test_my_function():
     """тестирует выполнение декорируемой функции"""
-    @log(filename="")
+    @log()
     def func(x, y):
         return x + y
     result = func(1, 2)
@@ -13,7 +14,7 @@ def test_my_function():
 
 def test_log_good(capsys):
     """тестирует вывод лога о успешном выполнении в консоль"""
-    @log(filename="")
+    @log()
     def func(x, y):
         return x + y
     func(1, 2)
@@ -23,7 +24,7 @@ def test_log_good(capsys):
 
 def test_log_exception(capsys):
     """тестирует вывод лога ошибки в консоль"""
-    @log(filename="")
+    @log()
     def func(x, y):
         return x + y
     func("1", "2")
@@ -31,10 +32,27 @@ def test_log_exception(capsys):
     assert captured.out == "my_function error: unsupported operand type(s) for +: 'int' and 'str'. Inputs:('1', '2'), {}\n"
 
 
-# def test_log_good_file_log():
-#     """тестирует вывод в файл лога о успешном выполнении"""
-#     @log(filename="mylog.txt")
-#     def func(x, y):
-#         return x + y
-#     result = func(1, 2)
-#     assert result == "my_function ok"
+def test_log_good_file_log(capsys):
+    """Тестирует запись в файл после успешного выполнения"""
+    with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
+        log_file_path = tmp_file.name
+    @log(filename=log_file_path)
+    def func(x, y):
+        return x + y
+    func(1, 2)
+    with open(log_file_path, 'r', encoding='utf-8') as file:
+        logs = file.read()
+    assert "my_function ok" in logs
+
+
+def test_log_exception_file_log(capsys):
+    """Тестирует запись в файл после ошибки"""
+    with tempfile.NamedTemporaryFile(delete=False) as tmp_file:
+        log_file_path = tmp_file.name
+    @log(filename=log_file_path)
+    def func(x, y):
+        return x + y
+    func(1, "2")
+    with open(log_file_path, 'r', encoding='utf-8') as file:
+        logs = file.read()
+    assert "my_function error" in logs
