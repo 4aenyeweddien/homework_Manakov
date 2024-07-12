@@ -12,6 +12,7 @@ def log(filename: Any = None) -> Callable:
             # result = func(*args, **kwargs)
             try:
                 result = func(*args, **kwargs)
+                result == sum(args)
                 if filename:
                     with open(filename, "a", encoding="utf-8") as file:
                         file.write("my_function ok\n")
@@ -33,7 +34,7 @@ def log(filename: Any = None) -> Callable:
 @log()
 def my_function(x: int, y: int) -> int:
     """принимает два значения и складывает их"""
-    return x + y
+    return x / y
 
 
-my_function(1, 2)
+my_function(1, 0)
