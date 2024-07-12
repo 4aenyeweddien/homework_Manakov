@@ -1,26 +1,21 @@
-from datetime import datetime
+# from datetime import datetime
 from typing import Callable, Any
 from functools import wraps
 
 
-def log(filename):
-    def decorator(func):
+def log(filename: Any) -> Callable:
+    """запись вызова функции и ее результат в файл или в консоль"""
+    def decorator(func: Callable) -> Callable:
         @wraps(func)
-        def wrapper(*args, **kwargs):
-            start_time = datetime.now().time()
+        def wrapper(*args: Any, **kwargs: Any):
             result = func(*args, **kwargs)
-            end_time = datetime.now().time()
             try:
                 result == sum(args)
                 if filename:
                     with open(filename, "a", encoding="utf-8") as file:
-                        file.write(f"Время начала работы функции: {start_time}\n")
-                        file.write(f"my_function ok\nРезультат:{result}\n")
-                        file.write(f"Время окончания работы функции: {end_time}\n")
+                        file.write(f"my_function ok\n")
                 else:
-                    print(f"Время начала работы функции:{start_time}")
-                    print(f"my_function ok\nРезультат:{result}")
-                    print(f"Время окончания работы функции:{end_time}")
+                    print(f"my_function ok")
             except Exception as e:
                 if filename:
                     with open(filename, "a", encoding="utf-8") as file:
@@ -32,9 +27,10 @@ def log(filename):
     return decorator
 
 
-@log(filename="src/mylog.txt")
-def my_function(x, y):
+@log(filename="")
+def my_function(x: int, y: int) -> int:
+    """принимает два значения и складывает их"""
     return x + y
 
 
-my_function(1, 2)
+my_function("1", "2")

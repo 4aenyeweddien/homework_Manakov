@@ -1,4 +1,2 @@
-Время начала работы функции: 17:03:54.344448
 my_function ok
-Результат:3
-Время окончания работы функции: 17:03:54.344448
+my_function error: unsupported operand type(s) for +: 'int' and 'str'. Inputs:('1', '2'), {}
