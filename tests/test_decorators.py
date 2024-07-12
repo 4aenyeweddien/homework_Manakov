@@ -2,7 +2,7 @@ import pytest
 from src.decorators import log, my_function
 
 
-def test_log():
+def test_my_function():
     """тестирует выполнение декорируемой функции"""
     @log(filename="")
     def func(x, y):
