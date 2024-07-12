@@ -1,21 +1,22 @@
 # from datetime import datetime
-from typing import Callable, Any
 from functools import wraps
+from typing import Any, Callable
 
 
 def log(filename: Any) -> Callable:
     """запись вызова функции и ее результат в файл или в консоль"""
+
     def decorator(func: Callable) -> Callable:
         @wraps(func)
-        def wrapper(*args: Any, **kwargs: Any):
+        def wrapper(*args: Any, **kwargs: Any) -> Any:
             result = func(*args, **kwargs)
             try:
                 result == sum(args)
                 if filename:
                     with open(filename, "a", encoding="utf-8") as file:
-                        file.write(f"my_function ok\n")
+                        file.write("my_function ok\n")
                 else:
-                    print(f"my_function ok")
+                    print("my_function ok")
             except Exception as e:
                 if filename:
                     with open(filename, "a", encoding="utf-8") as file:
@@ -23,7 +24,9 @@ def log(filename: Any) -> Callable:
                 else:
                     print(f"my_function error: {e}. Inputs:{args}, {kwargs}")
             return result
+
         return wrapper
+
     return decorator
 
 
