@@ -31,10 +31,10 @@ def log(filename: Any = None) -> Callable:
     return decorator
 
 
-@log()
-def my_function(x: int, y: int) -> int:
-    """принимает два значения и складывает их"""
-    return x / y
+# @log()
+# def my_function(x: int, y: int) -> int:
+#     """принимает два значения и складывает их"""
+#     return x / y
 
 
-my_function(1, 0)
+# my_function(1, 0)
