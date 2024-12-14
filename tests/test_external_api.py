@@ -29,6 +29,20 @@ def test_get_transaction_amount_rub_currency(mock_get):
 
 @patch("requests.get")
 def test_get_transaction_amount_usd_currency(mock_get):
-    mock_get.return_value.json.return_value = 104.461
+    mock_get.return_value.json.return_value = {
+  "date": "2018-02-22",
+  "historical": "",
+  "info": {
+    "rate": 148.972231,
+    "timestamp": 1519328414
+  },
+  "query": {
+    "amount": 1,
+    "from": "USD",
+    "to": "RUB"
+  },
+  "result": 104.461,
+  "success": true
+}
     assert get_transaction_amount(transaction) == 104.461
     mock_get.assert_called_once_with("https://api.apilayer.com/exchangerates_data/convert")
