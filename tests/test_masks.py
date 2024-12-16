@@ -1,5 +1,6 @@
 import pytest
-from src.masks import get_mask_card_number, get_mask_account
+
+from src.masks import get_mask_account, get_mask_card_number
 
 
 # тесты функции карты
@@ -60,10 +61,3 @@ def test_get_mask_account_wrong():
     """тест на недопустимые символы карты"""
     with pytest.raises(ValueError):
         get_mask_account("7365410d84asd5874305")
-
-
-
-
-
-
-
