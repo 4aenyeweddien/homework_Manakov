@@ -1,6 +1,7 @@
 import os
 import requests
 from dotenv import load_dotenv
+from unittest.mock import patch
 
 load_dotenv()
 API_KEY = os.getenv("API_KEY")
@@ -54,7 +55,7 @@ def get_transaction_amount(transaction: dict) -> float:
 #         "to": "Счет 35737585785074382265"
 #       }
 # transaction_amount = get_transaction_amount(transaction)
-# print(type(transaction_amount))
+# print(transaction_amount)
 
 
 # payload = {

@@ -19,9 +19,9 @@ def get_open_json(path: str) -> list:
         return []
 
 
-if __name__ == "__main__":
-    path_to_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "operations.json")
-    data = get_open_json(path_to_file)
-    print(data)
-    print(type(data))
+# if __name__ == "__main__":
+#     path_to_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "operations.json")
+#     data = get_open_json(path_to_file)
+#     print(data)
+#     print(type(data))
 
