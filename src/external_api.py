@@ -1,7 +1,7 @@
 import os
+
 import requests
 from dotenv import load_dotenv
-from unittest.mock import patch
 
 load_dotenv()
 API_KEY = os.getenv("API_KEY")
@@ -15,11 +15,7 @@ def get_transaction_amount(transaction: dict) -> float:
     amount_transaction = transaction["operationAmount"]["amount"]
     if currency_code != "RUB":
         try:
-            payload = {
-                "amount": f"{amount_transaction}",
-                "from": f"{currency_code}",
-                "to": "RUB"
-            }
+            payload = {"amount": f"{amount_transaction}", "from": f"{currency_code}", "to": "RUB"}
 
             headers = {"apikey": f"{API_KEY}"}
             response = requests.get(url, headers=headers, params=payload)
@@ -27,7 +23,7 @@ def get_transaction_amount(transaction: dict) -> float:
             if status_code == 200:
                 data_json = response.json()
                 amount += data_json["result"]
-                return round(amount, 3)
+                return round(float(amount), 3)
             else:
                 print(status_code)
                 print(f"Запрос не был успешным. Возможная причина: {response.reason}")
@@ -35,8 +31,8 @@ def get_transaction_amount(transaction: dict) -> float:
             print("Ошибка конвертации")
 
     else:
-        amount += float(transaction["operationAmount"]["amount"])
-        return amount
+        amount += transaction["operationAmount"]["amount"]
+    return float(amount)
 
 
 # if __name__ == "__main__":
