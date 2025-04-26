@@ -7,13 +7,12 @@ def filter_by_currency(transactions: list[dict], filter_transaction: str) -> Gen
         return iter([])
     for transaction in transactions:
         if "operationAmount" in transaction:
-            transaction_currency = transaction.get('operationAmount', {}).get('currency', {}).get('code')
+            transaction_currency = transaction.get("operationAmount", {}).get("currency", {}).get("code")
             if transaction_currency == filter_transaction:
                 yield transaction
-        elif 'currency_code' in transaction:
-            if transaction['currency_code'] == filter_transaction:
+        elif "currency_code" in transaction:
+            if transaction["currency_code"] == filter_transaction:
                 yield transaction
-
 
     # incorrect_currency = all(
     #     operation["operationAmount"]["currency"]["code"] != filter_transaction for operation in transactions
