@@ -1,15 +1,15 @@
+# import collections
+# import os
 import re
-import os
-import collections
 from collections import Counter
 
-from src.csv_xlsx import get_open_csv
+# from src.csv_xlsx import get_open_csv
 
 
 def filter_operations(transactions_dict: list[dict], search_bar: str) -> list[dict]:
     """Функция фильтрующая список транзакций и возвращает список словарей отфлиртрованных"""
     if not search_bar.strip():
-      return []
+        return []
     else:
         filtered_list = []
         pattern = r"\b" + re.escape(search_bar) + r"\b"
@@ -39,12 +39,12 @@ def counting_categories(transactions_dict: list[dict], list_category: list) -> d
     return counting_transaction
 
 
-if __name__ == "__main__":
-    categories_of_operations = ["Перевод с карты на карту", "Перевод организации", "Открытие вклада"]
-    path_to_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "transactions.csv")
-    data = get_open_csv(path_to_file)
-    result = counting_categories(data, categories_of_operations)
-    print(result)
-    # search_user = input()
-    # result = filter_operations(data, search_user)
-    # print(result)
+# if __name__ == "__main__":
+#     categories_of_operations = ["Перевод с карты на карту", "Перевод организации", "Открытие вклада"]
+#     path_to_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "transactions.csv")
+#     data = get_open_csv(path_to_file)
+#     result = counting_categories(data, categories_of_operations)
+#     print(result)
+# search_user = input()
+# result = filter_operations(data, search_user)
+# print(result)
