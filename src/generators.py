@@ -5,14 +5,24 @@ def filter_by_currency(transactions: list[dict], filter_transaction: str) -> Gen
     """создает итератор по списку словарей и выводит поочередно операции с указанной валютой"""
     if not transactions:
         return iter([])
-    incorrect_currency = all(
-        operation["operationAmount"]["currency"]["code"] != filter_transaction for operation in transactions
-    )
-    if incorrect_currency:
-        return iter([])
-    for operation in transactions:
-        if operation["operationAmount"]["currency"]["code"] == filter_transaction:
-            yield operation
+    for transaction in transactions:
+        if "operationAmount" in transaction:
+            transaction_currency = transaction.get('operationAmount', {}).get('currency', {}).get('code')
+            if transaction_currency == filter_transaction:
+                yield transaction
+        elif 'currency_code' in transaction:
+            if transaction['currency_code'] == filter_transaction:
+                yield transaction
+
+
+    # incorrect_currency = all(
+    #     operation["operationAmount"]["currency"]["code"] != filter_transaction for operation in transactions
+    # )
+    # if incorrect_currency:
+    #     return iter([])
+    # for operation in transactions:
+    #     if operation["operationAmount"]["currency"]["code"] == filter_transaction:
+    #         yield operation
 
 
 def transaction_descriptions(transactions: list[dict]) -> Generator:
