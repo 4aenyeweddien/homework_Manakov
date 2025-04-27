@@ -27,9 +27,21 @@ def mask_account_card(number_card_account: str) -> str | None:
 
 def get_data(date: str) -> str:
     """Принимает строку и выводит дату в нужном формате"""
-    format_date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f")
-    new_date = format_date.strftime("%d.%m.%Y")
-    return new_date
+    try:
+        format_date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f")
+    except ValueError:
+        try:
+            format_date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S")
+        except ValueError:
+            try:
+                format_date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%SZ")
+            except ValueError as e:
+                raise ValueError(f"Неизвестный формат даты: {date}") from e
+
+    return format_date.strftime("%d.%m.%Y")
+    # format_date = datetime.strptime(date, "%Y-%m-%dT%H:%M:%S.%f")
+    # new_date = format_date.strftime("%d.%m.%Y")
+    # return new_date
     # date_to_edit = date[0:10].split("-")
     # new_date = ".".join(date_to_edit[::-1])
     # return new_date

@@ -17,6 +17,7 @@ def get_open_csv(path: str) -> list:
 def get_open_xlsx(path: str) -> list | Any:
     """Преобразует данные из excell файла в список словарей"""
     excel_data = pd.read_excel(path)
+    excel_data["from"] = excel_data["from"].fillna("")
     df = excel_data.to_dict(orient="records")
     return df
 
